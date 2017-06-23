@@ -3,3 +3,10 @@ jdk:
 - oraclejdk8
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: voKrFiYfwCYFkdMd7rKGLp1DXLSBhem3or5m/SJ4Kj7eLgqOjXl/Sk+CcPSa9pphduOF3j3hetCPwBl7+y8NRyLfT23f8gNk24pmhtE4TDMoQz5UPJD+sxUWT5BQ7QMCa7Z6FCIgVrfquMAFOBahjPwL+3D7a3b0EAdpr+hnKbf4qW9H0NWT88q5G/6LaASdBzRjK8NM4QLp7cwvoFETiLkRjYrlryZoz1J7vKiGRfos64z+5VXOjW/Whn6k/FpJboXeGiXGX6zEEJYgnrwMGaZSo8xH26Stm4ipevPcU3gjjQCIOA9Efc8uobilvKkBH6yrMJR3/xu0mhlLnI1fC9TBrNgtGLGErUyO4pPXSrr93U2G38qrTQBgrV+Mygmp9NMVTo9CO2s8VufYW9AWNIpcWneJ/GH4gH2noOBSzoPdvHcNXYDM9wfNh/zJQs/0Sd/dgByPY4npjx7rQWAIMavc3jiXD2HGFak02gaKm676qDjOcVvOwtlFhNHmPYEoDIOxKVNffaIzgyuK93kRFD+7fxizZdELH4baPTYQvFVYgLj0mURBltNlZFd2RW2EUCaK8cz2hmxhbpMw3jscvTPLWaEmaeR4bCFacahHBklbWFcjNe2VszNE7iqtapvVH32hj2haWI5G77dS8mQZTZAlqNkMSy6bL6xO6nGYql0=
+  app: suntech-back
+  on:
+    repo: dhiegohenrique/suntech-back
