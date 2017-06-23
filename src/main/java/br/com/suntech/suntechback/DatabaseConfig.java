@@ -36,7 +36,8 @@ public class DatabaseConfig {
 			password = dbUri.getUserInfo().split(":")[1];
 			dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
 			
-			dataBaseName = dbUrl.substring(dbUrl.lastIndexOf("/"));
+//			dataBaseName = dbUrl.substring(dbUrl.lastIndexOf("/"));
+			dataBaseName = "";
 		}
 		
 //		MysqlDataSource dataSource = new MysqlDataSource();
