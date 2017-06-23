@@ -36,7 +36,7 @@ public class DatabaseConfig {
 			password = dbUri.getUserInfo().split(":")[1];
 			dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
 			
-//			dataBaseName = dbUrl.substring(dbUrl.lastIndexOf("/"));
+//			dataBaseName = dbUrl.substring(dbUrl.lastIndexOf("/") + 1);
 			dataBaseName = "";
 		}
 		
@@ -56,9 +56,12 @@ public class DatabaseConfig {
 	    System.err.println("password: " + password);
 	    System.err.println("dataBaseName: " + dataBaseName);
 		
-		Resource initSchema = new ClassPathResource("script.sql");
-	    DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema);
-	    DatabasePopulatorUtils.execute(databasePopulator, dataSource);
+	    if (dataBaseEnv == null) {
+			Resource initSchema = new ClassPathResource("script.sql");
+		    DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema);
+		    DatabasePopulatorUtils.execute(databasePopulator, dataSource);
+	    }
+	    
 	    dataSource.setUrl(dbUrl + dataBaseName);
 //	    dataSource.setUrl(dbUrl + "/heroku_0911389cc2d11f8");
 	    
