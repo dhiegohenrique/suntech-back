@@ -26,6 +26,7 @@ public class DatabaseConfig {
 		String dbUrl = "jdbc:mysql://localhost:3306";
 		String username = "root";
 		String password = "root";
+		String dataBaseName = "/suntech";
 		
 		String dataBaseEnv = System.getenv("CLEARDB_DATABASE_URL");
 		if (dataBaseEnv != null) {
@@ -34,6 +35,8 @@ public class DatabaseConfig {
 			username = dbUri.getUserInfo().split(":")[0];
 			password = dbUri.getUserInfo().split(":")[1];
 			dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
+			
+			dataBaseName = dbUrl.substring(dbUrl.lastIndexOf("/"));
 		}
 		
 //		MysqlDataSource dataSource = new MysqlDataSource();
@@ -50,12 +53,18 @@ public class DatabaseConfig {
 	    System.err.println("url: " + dbUrl);
 	    System.err.println("username: " + username);
 	    System.err.println("password: " + password);
+	    System.err.println("dataBaseName: " + dataBaseName);
 		
 		Resource initSchema = new ClassPathResource("script.sql");
 	    DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema);
 	    DatabasePopulatorUtils.execute(databasePopulator, dataSource);
-//	    dataSource.setUrl(dbUrl + "/suntech");
-	    dataSource.setUrl(dbUrl + "/heroku_0911389cc2d11f8");
+	    dataSource.setUrl(dbUrl + dataBaseName);
+//	    dataSource.setUrl(dbUrl + "/heroku_0911389cc2d11f8");
+	    
+	    
+	    
+	    
+	    
 		return dataSource;
     }
 }
