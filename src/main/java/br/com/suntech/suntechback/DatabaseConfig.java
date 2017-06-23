@@ -47,6 +47,9 @@ public class DatabaseConfig {
 	    dataSource.setUsername(username);
 	    dataSource.setPassword(password);
 		
+	    System.err.println("url: " + dbUrl);
+	    System.err.println("username: " + username);
+	    System.err.println("password: " + password);
 		
 		Resource initSchema = new ClassPathResource("script.sql");
 	    DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema);
