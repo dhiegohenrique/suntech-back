@@ -54,7 +54,8 @@ public class DatabaseConfig {
 		Resource initSchema = new ClassPathResource("script.sql");
 	    DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema);
 	    DatabasePopulatorUtils.execute(databasePopulator, dataSource);
-	    dataSource.setUrl(dbUrl + "/suntech");
+//	    dataSource.setUrl(dbUrl + "/suntech");
+	    dataSource.setUrl(dbUrl + "/heroku_0911389cc2d11f8");
 		return dataSource;
     }
 }

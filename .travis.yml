@@ -5,6 +5,8 @@ notifications:
   email: false
 services:
   - mysql
+before_script:
+  #- echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
 deploy:
   provider: heroku
   api_key:
