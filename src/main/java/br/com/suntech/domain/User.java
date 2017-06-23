@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 	@NamedQuery(name="User.findByEmail", query="SELECT u FROM User u WHERE u.email = ?1 ORDER BY u.id"),
 	@NamedQuery(name="User.findByUsername", query="SELECT u FROM User u WHERE u.username = ?1 ORDER BY u.id"),
-	@NamedQuery(name="User.findByName", query="SELECT u FROM User u WHERE u.filtername LIKE ?1 ORDER BY u.id")
+	@NamedQuery(name="User.findByName", query="SELECT u FROM User u WHERE UPPER(u.name) LIKE ?1 ORDER BY u.id")
 })
 public class User implements IUser {
 	
@@ -32,7 +32,6 @@ public class User implements IUser {
 	private String username;
 	private String password;
 	private String name;
-	private String filtername;
 	private String surname;
 	private String email;
 	private String phone;
@@ -78,10 +77,5 @@ public class User implements IUser {
 
 	public String getPhone() {
 		return this.phone;
-	}
-
-	@Override
-	public String getFilterName() {
-		return this.filtername;
 	}
 }

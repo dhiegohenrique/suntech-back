@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.suntech.domain.IUser;
 import br.com.suntech.domain.repository.UserRepository;
-import br.com.suntech.utils.FilterUtils;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,16 +24,28 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<? extends IUser> findByEmail(String email) {
+		if (email == null) {
+			email = "";
+		}
+		
 		return this.userRepository.findByEmail(email);
 	}
 
 	@Override
 	public List<? extends IUser> findByUsername(String username) {
+		if (username == null) {
+			username = "";
+		}
+		
 		return this.userRepository.findByUsername(username);
 	}
 
 	@Override
 	public List<? extends IUser> findByName(String name) {
-		return this.userRepository.findByName(FilterUtils.getFilterLike(name));
+		if (name == null) {
+			name = "";
+		}
+		
+		return this.userRepository.findByName(name.toUpperCase());
 	}
 }

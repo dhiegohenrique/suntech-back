@@ -10,7 +10,6 @@ public interface IUser extends Serializable{
 	public String getUsername();
 	public String getPassword();
 	public String getName();
-	public String getFilterName();
 	public String getSurname();
 	public String getEmail();
 	public String getPhone();

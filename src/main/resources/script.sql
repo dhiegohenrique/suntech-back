@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `enabled` int(1) NOT NULL DEFAULT '1',
   `registerdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `name` varchar(100) NOT NULL,
-  `filtername` varchar(100) NOT NULL,
   `surname` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `phone` varchar(20) NOT NULL,
@@ -34,11 +33,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Copiando dados para a tabela suntech.user: ~0 rows (aproximadamente)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`username`, `password`, `enabled`, `registerdate`, `name`, `filtername`, `surname`, `email`, `phone`) VALUES
-	('user1', hex(aes_encrypt('123qwe', ')*&SuNTech%2#')), 1, NOW(), 'Dhiego', 'Dhiego', 'Henrique', 'dhiego.henrique@hotmail.com', '48999999999'),
-	('user2', hex(aes_encrypt('user2_123', ')*&SuNTech%2#')), 0, NOW(), 'Maria', 'Maria', 'Carmo', 'maria@hotmail.com', '48996710952'),
-	('user3', hex(aes_encrypt('minha_SENHA', ')*&SuNTech%2#')), 1, NOW(), 'Frederico', 'Frederico', 'Silva', 'frederico.silva@gmail.com', '49996712354'),
-	('user4', hex(aes_encrypt('123456', ')*&SuNTech%2#')), 0, NOW(), 'Joana', 'Joana', 'Alves', 'dhiego.henrique@hotmail.com', '49888888888');
+INSERT INTO `user` (`username`, `password`, `enabled`, `registerdate`, `name`, `surname`, `email`, `phone`) VALUES
+	('user1', '123qwe', 1, NOW(), 'Dhiego', 'Henrique', 'dhiego.henrique@hotmail.com', '48999999999'),
+	('user2', 'user2_123', 0, NOW(), 'Maria', 'Carmo', 'maria@hotmail.com', '48996710952'),
+	('user3', 'minha_SENHA', 1, NOW(), 'Frederico', 'Silva', 'frederico.silva@gmail.com', '49996712354'),
+	('user4', '123456', 0, NOW(), 'Joana', 'Alves', 'dhiego.henrique@hotmail.com', '49888888888');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

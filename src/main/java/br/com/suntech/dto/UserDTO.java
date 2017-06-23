@@ -13,7 +13,6 @@ public class UserDTO implements IUser {
 	private String username;
 	private String password;
 	private String name;
-	private String filtername;
 	private String surname;
 	private String email;
 	private String phone;
@@ -114,9 +113,4 @@ public class UserDTO implements IUser {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-	@Override
-	public String getFilterName() {
-		return this.filtername;
-	}
 }

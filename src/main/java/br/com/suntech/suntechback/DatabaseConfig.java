@@ -35,26 +35,13 @@ public class DatabaseConfig {
 			username = dbUri.getUserInfo().split(":")[0];
 			password = dbUri.getUserInfo().split(":")[1];
 			dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
-			
-//			dataBaseName = dbUrl.substring(dbUrl.lastIndexOf("/") + 1);
 			dataBaseName = "";
 		}
-		
-//		MysqlDataSource dataSource = new MysqlDataSource();
-//		dataSource.setUrl(dbUrl);
-//	    dataSource.setUser(username);
-//	    dataSource.setPassword(password);
-//	    dataSource.setDatabaseName("suntech");
 		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setUrl(dbUrl);
 	    dataSource.setUsername(username);
 	    dataSource.setPassword(password);
-		
-	    System.err.println("url: " + dbUrl);
-	    System.err.println("username: " + username);
-	    System.err.println("password: " + password);
-	    System.err.println("dataBaseName: " + dataBaseName);
 		
 	    if (dataBaseEnv == null) {
 			Resource initSchema = new ClassPathResource("script.sql");
@@ -63,12 +50,6 @@ public class DatabaseConfig {
 	    }
 	    
 	    dataSource.setUrl(dbUrl + dataBaseName);
-//	    dataSource.setUrl(dbUrl + "/heroku_0911389cc2d11f8");
-	    
-	    
-	    
-	    
-	    
 		return dataSource;
     }
 }
