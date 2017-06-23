@@ -3,3 +3,7 @@ jkd:
 - oraclejdk8
 notifications:
   email: false
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
