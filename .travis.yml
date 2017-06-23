@@ -3,6 +3,8 @@ jdk:
 - oraclejdk8
 notifications:
   email: false
+services:
+  - mysql
 deploy:
   provider: heroku
   api_key:
