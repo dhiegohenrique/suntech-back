@@ -2,15 +2,18 @@ package br.com.suntech.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@RequestMapping(value="/", method=RequestMethod.GET)
 @CrossOrigin(origins = {"http://localhost:3001", "https://suntech-front.herokuapp.com"})
+@ApiIgnore
 public class IndexController {
 
-	public void users() {
-		System.err.println("entrou aqui");
+	@RequestMapping("/")
+	public ModelAndView index() {
+		return new ModelAndView("redirect:swagger-ui.html");
 	}
 }
