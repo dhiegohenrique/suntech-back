@@ -6,28 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import br.com.suntech.domain.IUser;
 import br.com.suntech.service.UserService;
 
 @RestController
 @RequestMapping(value="/users", method=RequestMethod.GET)
+@CrossOrigin(origins = {"http://localhost:3001", "https://suntech-front.herokuapp.com"})
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private Gson gson;
-	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    @CrossOrigin(origins = "http://localhost:8090")
 //    @ApiOperation(value = "User finding GET API")
 	public ResponseEntity<String> users() {
 		List<? extends IUser> listUsers = this.userService.getAllUsers();
@@ -39,7 +38,6 @@ public class UserController {
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//  @CrossOrigin(origins = "http://localhost:8090")
 //  @ApiOperation(value = "User finding GET API")
 	@RequestMapping(params = "name")
 	public ResponseEntity<String> usersByName(String name) {
@@ -52,7 +50,6 @@ public class UserController {
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//  @CrossOrigin(origins = "http://localhost:8090")
 //  @ApiOperation(value = "User finding GET API")
 	@RequestMapping(params = "email")
 	public ResponseEntity<String> usersByEmail(String email) {
@@ -65,7 +62,6 @@ public class UserController {
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//  @CrossOrigin(origins = "http://localhost:8090")
 //  @ApiOperation(value = "User finding GET API")
 	@RequestMapping(params = "username")
 	public ResponseEntity<String> usersByUsername(String username) {
@@ -78,6 +74,7 @@ public class UserController {
 	}
 	
 	private String getJson(List<? extends IUser> listUsers) {
-		return this.gson.toJson(listUsers);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
+		return gson.toJson(listUsers);
 	}
 }
