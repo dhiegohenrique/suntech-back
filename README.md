@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/dhiegohenrique/suntech-front.svg?branch=master)](https://travis-ci.org/dhiegohenrique/suntech-front)
+[![Build Status](https://travis-ci.org/dhiegohenrique/suntech-back.svg?branch=master)](https://travis-ci.org/dhiegohenrique/suntech-back)
 
 Requisitos:
 1) Java 8;
