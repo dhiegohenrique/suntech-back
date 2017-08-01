@@ -3,15 +3,18 @@ package br.com.suntech.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.suntech.domain.IUser;
+import br.com.suntech.domain.User;
 import br.com.suntech.domain.repository.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseService implements UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -20,6 +23,17 @@ public class UserServiceImpl implements UserService {
 	public List<? extends IUser> getAllUsers() {
 		Sort sort = new Sort(Direction.ASC, "id");
 		return this.userRepository.findAll(sort);
+	}
+	
+	@Override
+	public Page<User> getAllUsers(int page, int size) {
+		return this.getAllUsers(page, size, "");
+	}
+	
+	@Override
+	public Page<User> getAllUsers(int page, int size, String... sortFields) {
+		PageRequest pageRequest = this.getPageRequest(page, size, sortFields);
+		return this.userRepository.findAll(pageRequest);
 	}
 	
 	@Override

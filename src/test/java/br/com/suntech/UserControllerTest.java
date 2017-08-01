@@ -4,6 +4,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,12 @@ import br.com.suntech.dto.UserDTO;
 public class UserControllerTest extends BaseTest {
 	
     private Gson gson = new Gson();
+    
+    @Before
+    public void setUp() {
+    	System.err.println("CONFIGURA////////////////////////////////////////////////");
+    	
+    }
     
     @Test
 	@Rollback

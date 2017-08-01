@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.com.suntech.domain.IUser;
+import br.com.suntech.domain.User;
 import br.com.suntech.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -28,7 +30,13 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(value="/users", method=RequestMethod.GET)
-@CrossOrigin(origins = {"http://localhost:3001", "https://suntech-front.herokuapp.com"})
+@CrossOrigin(origins = {
+		"http://localhost:3001", 
+		"https://suntech-front.herokuapp.com",
+		"https://suntech-front-ang2.herokuapp.com",
+		"http://localhost:4200",
+		"http://localhost:49152",
+		})
 @Api(value = "Usuários")
 public class UserController {
 
@@ -47,6 +55,40 @@ public class UserController {
 		}
 		
 		return new ResponseEntity<>(this.getJson(listUsers), HttpStatus.OK);
+	}
+	
+	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(params = {"page", "size"})
+	@ApiOperation(value = "Retorna todos os usuários com paginação", response = IUser.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = HttpServletResponse.SC_OK, message = "Usuários retornados com sucesso.", response = IUser.class, responseContainer = "List"),
+	})
+	@ApiImplicitParams({
+	    @ApiImplicitParam(name = "page", value = "Índice da página", paramType = "query", dataType = "string"),
+	    @ApiImplicitParam(name = "size", value = "Total de resultados", paramType = "query", dataType = "string")
+	  })
+	public ResponseEntity<Page<User>> users(int page, int size) {
+		return this.users(page, size, "");
+	}
+	
+	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(params = {"page", "size", "sort"})
+	@ApiOperation(value = "Retorna todos os usuários com paginação e ordenação", response = Page.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = HttpServletResponse.SC_OK, message = "Usuários retornados com sucesso.", response = IUser.class, responseContainer = "List"),
+	})
+	@ApiImplicitParams({
+	    @ApiImplicitParam(name = "page", value = "Índice da página", paramType = "query", dataType = "string"),
+	    @ApiImplicitParam(name = "size", value = "Total de resultados por página", paramType = "query", dataType = "string"),
+	    @ApiImplicitParam(name = "sort", value = "Campos para ordenação", paramType = "query", dataType = "string"),
+	  })
+	public ResponseEntity<Page<User>> users(int page, int size, String... sort) {
+		Page<User> pageUser = this.userService.getAllUsers(page, size, sort);
+		if (pageUser == null || pageUser.getSize() == 0) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(pageUser, HttpStatus.OK);
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

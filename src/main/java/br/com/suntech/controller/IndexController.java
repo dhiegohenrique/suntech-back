@@ -8,7 +8,13 @@ import org.springframework.web.servlet.ModelAndView;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3001", "https://suntech-front.herokuapp.com"})
+@CrossOrigin(origins = {
+		"http://localhost:3001", 
+		"https://suntech-front.herokuapp.com",
+		"https://suntech-front-ang2.herokuapp.com",
+		"http://localhost:4200",
+		"http://localhost:49152",
+		})
 @ApiIgnore
 public class IndexController {
 
